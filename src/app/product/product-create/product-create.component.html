@@ -1,0 +1,76 @@
+<section class="content-header">
+  <div class="container-fluid">
+    <div class="row mb-2">
+      <div class="col-sm-6">
+        <h1>Thêm mới sản phẩm</h1>
+      </div>
+      <div class="col-sm-6">
+        <ol class="breadcrumb float-sm-right">
+          <li class="breadcrumb-item"><a routerLink="/product/list">Trang chủ</a></li>
+          <li class="breadcrumb-item active">Thêm mới sản phẩm</li>
+        </ol>
+      </div>
+    </div>
+  </div><!-- /.container-fluid -->
+</section>
+
+<!-- Main content -->
+<section class="content">
+  <div class="container-fluid">
+    <div class="row">
+      <!-- left column -->
+      <div class="col-12">
+        <!-- general form elements -->
+        <div class="card card-primary">
+          <div class="card-header">
+            <h3 class="card-title">Thêm mới sản phẩm</h3>
+          </div>
+          <!-- /.card-header -->
+          <!-- form start -->
+          <form [formGroup]="productForm" (ngSubmit)="createProduct()">
+            <div class="card-body">
+              <div class="form-group">
+                <label for="name">Tên sản phẩm</label>
+                <input type="text" class="form-control" id="name" formControlName="name">
+                <div style="color: red" *ngIf="nameCreate.errors?.required">name is required</div>
+                <div style="color: red" *ngIf="nameCreate.errors?.minlength">min 6 character</div>
+                <div style="color: red" *ngIf="nameCreate.errors?.maxlength">max 12 character</div>
+              </div>
+              <div class="form-group">
+                <label for="price">Giá sản phẩm</label>
+                <input type="text" class="form-control" id="price" formControlName="price">
+                <p style="color: red" [hidden]="priceCreate.valid || priceCreate.touched"> Price is required</p>
+              </div>
+              <div class="form-group">
+                <label for="description">Mô tả sản phẩm</label>
+                <input type="text" class="form-control" id="description" formControlName="description">
+                <p style="color: red" [hidden]="descriptionCreate.valid || descriptionCreate.touched"> description is
+                  required</p>
+              </div>
+              <div class="form-group">
+                <label for="description">Ảnh sản phẩm</label>
+                <input type="file" class="form-control" id="image" formControlName="image"
+                       (change)="onFileSelect($event)">
+                <p style="color: red" [hidden]="imageCreate.valid || imageCreate.touched"> description is required</p>
+              </div>
+              <div class="form-group">
+                <label for="description">Danh mục</label>
+                <select id="category" formControlName="category">
+                  <option *ngFor="let category of categories" [value]="category.id">{{category.name}}</option>
+                </select>
+              </div>
+            </div>
+            <!-- /.card-body -->
+
+            <div class="card-footer">
+              <button type="submit" class="btn btn-primary">Tạo mới</button>
+            </div>
+          </form>
+        </div>
+        <!-- /.card -->
+      </div>
+      <!--/.col (left) -->
+    </div>
+    <!-- /.row -->
+  </div><!-- /.container-fluid -->
+</section>

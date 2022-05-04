@@ -1,0 +1,57 @@
+<section class="content-header">
+  <div class="container-fluid">
+    <div class="row mb-2">
+      <div class="col-sm-6">
+        <h1>Danh sách danh mục</h1>
+      </div>
+      <div class="col-sm-6">
+        <ol class="breadcrumb float-sm-right">
+          <li class="breadcrumb-item"><a routerLink="/category/list">Home</a></li>
+          <li class="breadcrumb-item active">Danh sách danh mục/li>
+        </ol>
+      </div>
+    </div>
+  </div><!-- /.container-fluid -->
+</section>
+<section class="content">
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col-12">
+        <div class="card">
+          <div class="card-header">
+            <h3 class="card-title">Danh sách damh mục</h3>
+            <div class="card-tools">
+              <button class="btn btn-primary" routerLink="/category/create">Tạo mới</button>
+            </div>
+          </div>
+          <!-- /.card-header -->
+          <div class="card-body">
+            <table id="product-list" class="table table-bordered table-hover">
+              <thead>
+              <tr>
+                <th>#</th>
+                <th>Tên danh mục</th>
+                <th></th>
+                <th></th>
+              </tr>
+              </thead>
+              <tbody>
+              <tr *ngFor="let category of categories; index as i">
+                <td>{{i}}</td>
+                <td>{{category.name}}</td>
+                <td class="text-center"><a class="btn btn-warning" [routerLink]="['/category/edit',category.id]"><i class="fa fa-edit"></i></a></td>
+                <td class="text-center"><a class="btn btn-danger" [routerLink]="['/category/delete',category.id]"><i class="fa fa-trash"></i></a></td>
+              </tr>
+              </tbody>
+            </table>
+          </div>
+          <!-- /.card-body -->
+        </div>
+        <!-- /.card -->
+      </div>
+      <!-- /.col -->
+    </div>
+    <!-- /.row -->
+  </div>
+  <!-- /.container-fluid -->
+</section>

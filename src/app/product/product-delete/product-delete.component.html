@@ -1,0 +1,114 @@
+<!--<h1>Cập nhật thông tin sản phẩm</h1>-->
+<!--<form [formGroup]="productForm" (ngSubmit)="updateProduct()">-->
+<!--  <table>-->
+<!--    <tr>-->
+<!--      <td>Mã sản phẩm:</td>-->
+<!--      <td><input type="number" formControlName="id" disabled></td>-->
+<!--    </tr>-->
+<!--    <tr>-->
+<!--      <td>Tên sản phẩm:</td>-->
+<!--      <td><input type="text" formControlName="name"></td>-->
+<!--      <div style="color: red" *ngIf="nameEdit.errors?.required">name is required</div>-->
+<!--      <div style="color: red" *ngIf="nameEdit.errors?.minlength">min 6 character</div>-->
+<!--      <div style="color: red" *ngIf="nameEdit.errors?.maxlength">max 12 character</div>-->
+<!--    </tr>-->
+<!--    <tr>-->
+<!--      <td>Giá sản phẩm</td>-->
+<!--      <td><input type="number" formControlName="price" required></td>-->
+<!--      <p style="color: red" [hidden]="priceEdit.valid || priceEdit.touched"> Price is required</p>-->
+<!--    </tr>-->
+<!--    <tr>-->
+<!--      <td>Anh về sản phẩm</td>-->
+<!--      <td><input type="text" formControlName="image"></td>-->
+<!--    </tr>-->
+<!--    <tr>-->
+<!--      <td>Mô tả về sản phẩm</td>-->
+<!--      <td><input type="text" formControlName="description" required></td>-->
+<!--      <p style="color: red" [hidden]="descriptionEdit.valid || descriptionEdit.touched"> description is required</p>-->
+<!--    </tr>-->
+<!--    <tr>-->
+<!--      <td>Danh mục sản phẩm</td>-->
+<!--      <td>-->
+<!--        <select id="category" formControlName="category">-->
+<!--          <option *ngFor="let category of categories" [value]="category.id">{{category.name}}</option>-->
+<!--        </select>-->
+<!--      </td>-->
+<!--    </tr>-->
+<!--    <tr>-->
+<!--      <td></td>-->
+<!--      <td>-->
+<!--        <button>Cập nhật</button>-->
+<!--      </td>-->
+<!--    </tr>-->
+<!--  </table>-->
+<!--</form>-->
+<section class="content-header">
+  <div class="container-fluid">
+    <div class="row mb-2">
+      <div class="col-sm-6">
+        <h1>Xóa sản phẩm</h1>
+      </div>
+      <div class="col-sm-6">
+        <ol class="breadcrumb float-sm-right">
+          <li class="breadcrumb-item"><a routerLink="/product/list">Trang chủ</a></li>
+          <li class="breadcrumb-item active">Xóa sản phẩm</li>
+        </ol>
+      </div>
+    </div>
+  </div><!-- /.container-fluid -->
+</section>
+
+<!-- Main content -->
+<section class="content">
+  <div class="container-fluid">
+    <div class="row">
+      <!-- left column -->
+      <div class="col-12">
+        <!-- general form elements -->
+        <div class="card card-primary">
+          <div class="card-header">
+            <h3 class="card-title">Xóa sản phẩm</h3>
+          </div>
+          <!-- /.card-header -->
+          <!-- form start -->
+          <form (ngSubmit)="deleteProduct()">
+            <div class="card-body">
+              <div class="form-group">
+                <label for="price">Mã sản phẩm: </label>
+                <input type="text" class="form-control" id="id" value="{{product.id}}" disabled>
+              </div>
+              <div class="form-group">
+                <label for="name">Tên sản phẩm: </label>
+                <input type="text" class="form-control" id="name" value="{{product.name}}" disabled>
+              </div>
+              <div class="form-group">
+                <label for="price">Giá sản phẩm: </label>
+                <input type="text" class="form-control" id="price" value="{{product.price}}" disabled>
+              </div>
+              <div class="form-group">
+                <label>Ảnh sản phẩm:</label>
+                <img src="http://localhost:8080/image/{{product.image}}" alt="anh" height="100">
+              </div>
+              <div class="form-group">
+                <label for="description">Mô tả sản phẩm: </label>
+                <input type="text" class="form-control" id="description" value="{{product.description}}" disabled>
+              </div>
+              <div class="form-group">
+                <label for="category">Danh mục: </label>
+                <input type="text" class="form-control" id="category" value="{{product.category.name}}" disabled>
+              </div>
+            </div>
+            <!-- /.card-body -->
+
+            <div class="card-footer">
+              <button type="submit" class="btn btn-primary">Xóa sản phẩm</button>
+            </div>
+          </form>
+        </div>
+        <!-- /.card -->
+      </div>
+      <!--/.col (left) -->
+    </div>
+    <!-- /.row -->
+  </div><!-- /.container-fluid -->
+</section>
