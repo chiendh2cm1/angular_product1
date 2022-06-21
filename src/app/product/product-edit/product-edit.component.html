@@ -75,14 +75,11 @@
             <div class="card-body">
               <div class="form-group">
                 <label for="price">Id</label>
-                <input type="text" class="form-control" id="id" formControlName="id" disabled>
+                <input type="text" class="form-control" id="id" formControlName="id" [ngModel]="product.id" disabled>
               </div>
               <div class="form-group">
                 <label for="name">Tên sản phẩm</label>
                 <input type="text" class="form-control" id="name" formControlName="name" [ngModel]="product.name">
-                <div style="color: red" *ngIf="nameEdit.errors?.required">name is required</div>
-                <div style="color: red" *ngIf="nameEdit.errors?.minlength">min 6 character</div>
-                <div style="color: red" *ngIf="nameEdit.errors?.maxlength">max 12 character</div>
               </div>
               <div class="form-group">
                 <label for="price">Giá sản phẩm</label>
@@ -93,8 +90,7 @@
                 <div class="m-3">
                   <img src="http://localhost:8080/image/{{product.image}}" alt="x" width="100">
                 </div>
-                <input type="file" class="form-control" id="image" formControlName="image"
-                       (change)="onFileSelect($event)">
+                <input type="file" class="form-control" id="image" formControlName="image">
               </div>
               <div class="form-group">
                 <label for="description">Mô tả sản phẩm</label>
@@ -103,7 +99,9 @@
               <div class="form-group">
                 <label for="category">Danh mục</label>
                 <select id="category" formControlName="category" class="form-control" [ngModel]="product.category?.id">
-                  <option *ngFor="let category of categories" [value]="category.id">{{category.name}}</option>
+                  <option *ngFor="let category of categories" [value]="category.id">
+                    {{category.name}}
+                  </option>
                 </select>
               </div>
             </div>

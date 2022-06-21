@@ -7,10 +7,11 @@ import { ProductCreateComponent } from './product-create/product-create.componen
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import { ProductEditComponent } from './product-edit/product-edit.component';
 import { ProductDeleteComponent } from './product-delete/product-delete.component';
+import { ProductDetailComponent } from './product-detail/product-detail.component';
 
 
 @NgModule({
-    declarations: [ProductListComponent, ProductCreateComponent, ProductEditComponent, ProductDeleteComponent],
+    declarations: [ProductListComponent, ProductCreateComponent, ProductEditComponent, ProductDeleteComponent, ProductDetailComponent],
     exports: [
         ProductListComponent
     ],

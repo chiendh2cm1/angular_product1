@@ -40,7 +40,10 @@ export class ProductCreateComponent implements OnInit {
       formData.append('name', this.productForm.get('name').value);
       formData.append('price', this.productForm.get('price').value);
       formData.append('description', this.productForm.get('description').value);
-      formData.append('image', this.productForm.get('image').value);
+      const files = (document.getElementById('image') as HTMLInputElement).files;
+      if (files.length > 0) {
+        formData.append('image', files[0]);
+      }
       formData.append('category', this.productForm.get('category').value);
       this.productService.saveProduct(formData).subscribe(() => {
           this.notificationService.showMessage('success', 'Tạo mới thành công!');
@@ -74,12 +77,5 @@ export class ProductCreateComponent implements OnInit {
     this.categoryService.getAll().subscribe(categories => {
       this.categories = categories;
     });
-  }
-
-  onFileSelect($event) {
-    if ($event.target.files.length > 0) {
-      const file = $event.target.files[0];
-      this.productForm.get('image').setValue(file);
-    }
   }
 }

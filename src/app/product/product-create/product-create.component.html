@@ -32,30 +32,31 @@
               <div class="form-group">
                 <label for="name">Tên sản phẩm</label>
                 <input type="text" class="form-control" id="name" formControlName="name">
-                <div style="color: red" *ngIf="nameCreate.errors?.required">name is required</div>
-                <div style="color: red" *ngIf="nameCreate.errors?.minlength">min 6 character</div>
-                <div style="color: red" *ngIf="nameCreate.errors?.maxlength">max 12 character</div>
+                <div [hidden]="nameCreate.valid || !nameCreate.touched">
+                  <div style="color: red" *ngIf="nameCreate.errors?.required">name is required</div>
+                  <div style="color: red" *ngIf="nameCreate.errors?.minlength">min 6 character</div>
+                  <div style="color: red" *ngIf="nameCreate.errors?.maxlength">max 12 character</div>
+                </div>
               </div>
               <div class="form-group">
                 <label for="price">Giá sản phẩm</label>
                 <input type="text" class="form-control" id="price" formControlName="price">
-                <p style="color: red" [hidden]="priceCreate.valid || priceCreate.touched"> Price is required</p>
+                <p style="color: red" [hidden]="priceCreate.valid || !priceCreate.touched"> Price is required</p>
               </div>
               <div class="form-group">
                 <label for="description">Mô tả sản phẩm</label>
                 <input type="text" class="form-control" id="description" formControlName="description">
-                <p style="color: red" [hidden]="descriptionCreate.valid || descriptionCreate.touched"> description is
+                <p style="color: red" [hidden]="descriptionCreate.valid || !descriptionCreate.touched"> description is
                   required</p>
               </div>
               <div class="form-group">
                 <label for="description">Ảnh sản phẩm</label>
-                <input type="file" class="form-control" id="image" formControlName="image"
-                       (change)="onFileSelect($event)">
-                <p style="color: red" [hidden]="imageCreate.valid || imageCreate.touched"> description is required</p>
+                <input type="file" class="form-control" id="image" formControlName="image">
+                <p style="color: red" [hidden]="imageCreate.valid || !imageCreate.touched"> description is required</p>
               </div>
               <div class="form-group">
                 <label for="description">Danh mục</label>
-                <select id="category" formControlName="category">
+                <select id="category" formControlName="category" class="form-control">
                   <option *ngFor="let category of categories" [value]="category.id">{{category.name}}</option>
                 </select>
               </div>
@@ -63,7 +64,7 @@
             <!-- /.card-body -->
 
             <div class="card-footer">
-              <button type="submit" class="btn btn-primary">Tạo mới</button>
+              <button type="submit" class="btn btn-primary" style="float: right">Tạo mới</button>
             </div>
           </form>
         </div>

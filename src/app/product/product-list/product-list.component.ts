@@ -22,6 +22,7 @@ export class ProductListComponent implements OnInit {
   getAllProduct() {
     this.productService.getAll().subscribe((products) => {
       this.products = products.content;
+      // tslint:disable-next-line:only-arrow-functions
       $(function() {
         $('#product-list').DataTable({
           'paging': true,

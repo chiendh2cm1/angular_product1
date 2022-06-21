@@ -14,7 +14,14 @@ import {NotificationService} from '../../service/notifocation/notification.servi
 })
 export class ProductEditComponent implements OnInit {
   product: Product;
-  productForm: FormGroup;
+  productForm = new FormGroup({
+    id: new FormControl('', []),
+    name: new FormControl('', []),
+    price: new FormControl('', []),
+    image: new FormControl('', []),
+    description: new FormControl('', []),
+    category: new FormControl('', []),
+  });
   id: number;
   categories: Category[] = [];
 
@@ -23,48 +30,24 @@ export class ProductEditComponent implements OnInit {
               private router: Router,
               private categoryService: CategoryService,
               private notificationService: NotificationService) {
-    this.activatedRoute.paramMap.subscribe((paramMap: ParamMap) => {
-      this.id = +paramMap.get('id');
-      this.productForm = new FormGroup({
-        id: new FormControl(''),
-        name: new FormControl('', [Validators.required, Validators.minLength(6), Validators.maxLength(12)]),
-        price: new FormControl('', [Validators.required]),
-        image: new FormControl(''),
-        description: new FormControl(''),
-        category: new FormControl('', [Validators.required]),
-      });
-      this.getProduct();
-    });
   }
 
   ngOnInit() {
     this.getCategories();
+    this.getProduct();
   }
 
-  private getProduct() {
-    return this.productService.findById(this.id).subscribe(product => {
-      this.product = product;
+
+  getProduct() {
+    this.activatedRoute.paramMap.subscribe((params: ParamMap) => {
+      const id = +params.get('id');
+      this.id = id;
+      this.productService.findById(id).subscribe(
+        (product) => {
+          this.product = product;
+        }
+      );
     });
-  }
-
-  get idEdit() {
-    return this.productForm.get('id');
-  }
-
-  get nameEdit() {
-    return this.productForm.get('name');
-  }
-
-  get priceEdit() {
-    return this.productForm.get('price');
-  }
-
-  get imageEdit() {
-    return this.productForm.get('image');
-  }
-
-  get descriptionEdit() {
-    return this.productForm.get('description');
   }
 
   getCategories() {
@@ -73,20 +56,16 @@ export class ProductEditComponent implements OnInit {
     });
   }
 
-  onFileSelect(event) {
-    if (event.target.files.length > 0) {
-      const file = event.target.files[0];
-      this.productForm.get('image').setValue(file);
-    }
-  }
-
   updateProduct() {
     if (this.productForm.valid) {
       const formData = new FormData();
       formData.append('name', this.productForm.get('name').value);
       formData.append('price', this.productForm.get('price').value);
       formData.append('description', this.productForm.get('description').value);
-      formData.append('image', this.productForm.get('image').value);
+      const files = (document.getElementById('image') as HTMLInputElement).files;
+      if (files.length > 0) {
+        formData.append('image', files[0]);
+      }
       formData.append('category', this.productForm.get('category').value);
       this.productService.updateProduct(this.id, formData).subscribe(() => {
         this.notificationService.showMessage('success', 'Sửa thành công!');
